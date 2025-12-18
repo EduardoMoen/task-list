@@ -1,4 +1,8 @@
 <ul class="list-group">
-  <li class="list-group-item">Home Page</li>
-  <li class="list-group-item">Tag List</li>
+  <li class="list-group-item">
+    <a href="{% url 'task:index' %}">Home</a>
+  </li>
+  <li class="list-group-item">
+    <a href="{% url 'task:tag-list' %}">Tags</a>
+  </li>
 </ul>
