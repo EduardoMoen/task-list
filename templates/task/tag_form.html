@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Tag {{ object|yesno:"Update, Create" }}{% endblock %}
+
+{% block content %}
+<div class="col-3">
+  <h1>Tag {{ object|yesno:"Update, Create" }}</h1>
+  <form class="mt-4" method="post">
+    {% csrf_token%}
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="Submit">
+  </form>
+</div>
+{% endblock %}
