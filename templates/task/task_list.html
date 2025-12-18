@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<h1>
+  TODO List
+  <a class="btn btn-primary" href="#" style="float:right">Add task</a>
+</h1>
+
+<ul class="list-group list-group-flush mt-3">
+  {% for task in task_list %}
+    <li class="list-group-item">
+      <p>
+        <b>
+          {{ task.content }}
+        </b>
+          {% if task.concluded %}
+            <b style="color: green">Done</b>
+          {% else %}
+            <b style="color: red"> Not done</b>
+          {% endif %}
+        <form action="{% url 'task:task-toggle' task.id %}" method="post">
+          {% csrf_token %}
+          <button style="float:right" type="submit" class="btn {% if task.concluded %} btn-secondary{% else %}btn-success{% endif %}">
+            {% if task.concluded %}
+              Undo
+            {% else %}
+              Complete
+            {% endif %}
+          </button>
+        </form>
+      </p>
+      <p>
+        Created: {{ task.date }}
+        {% if task.deadline %}
+        <span style="color: darkred">
+          Deadline:
+          {{ task.deadline }}
+          {% endif %}
+        </span>
+      </p>
+      <p style="color: grey">
+        Tags:
+        {% for tag in task.tags.all %}
+        {{ tag.name }}
+        {% endfor %}
+        <a href="#">Update</a>
+        <a href="#">Delete</a>
+      </p>
+    </li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}

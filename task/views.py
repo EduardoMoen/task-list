@@ -1,13 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.decorators.http import require_POST
 
 from task.forms import TagForm
-from task.models import Tag
+from task.models import Tag , Task
 
 
-def index(request):
-    return render(request,'task/index.html')
+@require_POST
+def task_toggle(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.concluded = not task.concluded
+    task.save()
+    return redirect('task:task-list')
+
+
+class TaskListView(generic.ListView):
+    model = Task
 
 
 class TagListView(generic.ListView):
