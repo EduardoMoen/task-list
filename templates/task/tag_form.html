@@ -3,8 +3,8 @@
 {% block title %}Tag {{ object|yesno:"Update, Create" }}{% endblock %}
 
 {% block content %}
+<h1>Tag {{ object|yesno:"Update, Create" }}</h1>
 <div class="col-3">
-  <h1>Tag {{ object|yesno:"Update, Create" }}</h1>
   <form class="mt-4" method="post">
     {% csrf_token%}
     {{ form.as_p }}

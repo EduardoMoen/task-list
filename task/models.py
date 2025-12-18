@@ -18,5 +18,8 @@ class Task(models.Model):
         related_name='tasks'
     )
 
+    class Meta:
+        ordering = ["concluded", "-date"]
+
     def __str__(self):
         return self.content
