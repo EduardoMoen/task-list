@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
@@ -8,7 +9,7 @@ from task.models import Tag , Task
 
 
 @require_POST
-def task_toggle(request, pk):
+def task_toggle(request: HttpRequest, pk: int) -> HttpResponse:
     task = get_object_or_404(Task, pk=pk)
     task.concluded = not task.concluded
     task.save()
